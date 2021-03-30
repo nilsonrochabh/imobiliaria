@@ -14,9 +14,15 @@ use App\Http\Controllers\Admin\CidadeController;
 |
 */
 
+Route::redirect('/', 'admin/cidades');
+
+Route::prefix('admin')->name('admin.')->group(function(){
+
+    Route::resource('cidades', [CidadeController::class]);
+
+});
 
 
 
-Route::get('/', [CidadeController::class,'cidade']);
 
 
