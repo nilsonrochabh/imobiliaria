@@ -18,7 +18,7 @@ Route::redirect('/', 'admin/cidades');
 
 Route::prefix('admin')->name('admin.')->group(function(){
 
-    Route::resource('cidades', [CidadeController::class]);
+    Route::resource('cidades', CidadeController::class) ->except(['show']);
 
 });
 

@@ -1,14 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cidade;
 use Illuminate\Http\Request;
 use App\Http\Requests\CidadeRequest;
 
 
-class AdminCidadeController extends Controller
+class CidadeController extends Controller
 {
+    private $objCidade;
+
+    public function __construct()
+    {
+
+        $this->objCidade = new Cidade();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,7 +39,7 @@ class AdminCidadeController extends Controller
     public function create()
     {
         $action = route('admin.cidades.store');
-        return view('admin.cidades.formAdicionar');
+        return view('admin.cidades.formAdicionar', compact('action'));
     }
 
     /**
@@ -46,16 +55,6 @@ class AdminCidadeController extends Controller
         return redirect()->route('admin.cidades.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -65,7 +64,9 @@ class AdminCidadeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $action = route('admin.cidades.update',$cidade->id);
+        return view('admin.cidades.formAdicionar', compact('cidade','action'));
     }
 
     /**
@@ -75,9 +76,14 @@ class AdminCidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CidadeRequest $request, $id)
     {
-        //
+        $cidade = Cidade::find($id);
+        $cidade->update($request->all());
+
+        $request->session()->flash('sucesso', 'A Cidade : $request->nome foi alterada com sucesso' );
+        return redirect()->route('admin.cidades.index');
+
     }
 
     /**
@@ -86,8 +92,10 @@ class AdminCidadeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        Cidade::destroy($id);
+        $request->session()->flash('sucesso','Cidade Excluida com sucesso');
+        return redirect()->route('admin.cidades.index');
     }
 }

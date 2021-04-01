@@ -49,7 +49,7 @@
     </table>
 
     <div class="fixed-action-btn">
-        <a class="btn-floating btn-large waves-effect waves-light" href="{{route('admin.cidades.store')}}">
+        <a class="btn-floating btn-large waves-effect waves-light" href="{{route('admin.cidades.create')}}">
         <i class="large material-icons" >add</i>
     </a>
     </div>
