@@ -10,9 +10,24 @@ class Imovel extends Model
 
     protected $table = "imoveis";
 
+    protected $fillable=[
+        'titulo',
+        'terreno',
+        'salas',
+        'dormitorios',
+        'garagens',
+        'banheiros',
+        'descricao',
+        'preco',
+        'cidade_id',
+        'tipo_id',
+        'finalidade_id'
+
+    ];
+
     public function endereco(){
         //relacionamento uma para um
-        return $this->belongsTo(Endereco::class);
+        return $this->hasOne(Endereco::class);
 
     }
 
@@ -29,7 +44,7 @@ class Imovel extends Model
 
     //muitos para muitos
     public function proximidades(){
-        return $this->belongsToMany(Proximidade::class);
+        return $this->belongsToMany(Proximidade::class)->withTimestamps();
 
     }
 }

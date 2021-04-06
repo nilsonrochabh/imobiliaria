@@ -26,7 +26,7 @@ class CidadeController extends Controller
     public function index()
     {
         $subtitulo = "Lista de Cidades";
-        $cidades = Cidade::all();
+        $cidades = Cidade::orderBy('nome','asc')->get();
         return view('admin.cidades.index',compact('subtitulo', 'cidades'));
 
     }
@@ -51,7 +51,7 @@ class CidadeController extends Controller
     public function store(CidadeRequest $request)
     {
         Cidade::create($request->all());
-        $request->session()->flash('sucesso', 'A Cidade : $request->nome foi incluida com sucesso' );
+        $request->session()->flash('sucesso', `A Cidade : $request->nome foi incluida com sucesso` );
         return redirect()->route('admin.cidades.index');
     }
 
@@ -81,7 +81,7 @@ class CidadeController extends Controller
         $cidade = Cidade::find($id);
         $cidade->update($request->all());
 
-        $request->session()->flash('sucesso', 'A Cidade : $request->nome foi alterada com sucesso' );
+        $request->session()->flash('sucesso', 'A Cidade : $cidade->nome foi alterada com sucesso' );
         return redirect()->route('admin.cidades.index');
 
     }

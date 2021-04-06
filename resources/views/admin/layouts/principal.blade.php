@@ -22,10 +22,10 @@
             <a href="/" class="brand-logo"> Best Imoveis</a>
             <ul class="right">
                 <li>
-                    <a href="">Imoveis</a>
+                <a href="{{route('admin.imoveis.index')}}">Imoveis</a>
                 </li>
                 <li>
-                    <a href="">Cidades</a>
+                    <a href="{{route('admin.cidades.index')}}">Cidades</a>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
 
 
 
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> --}}
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script src="{{ url('js/materialize.min.js')}}"></script>
 
@@ -46,7 +46,12 @@
         @if(session('sucesso'))
             M.toast({html: "{{session('sucesso')}}"});
         @endif
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);
+        });
 
     </script>
+
 </body>
 </html>

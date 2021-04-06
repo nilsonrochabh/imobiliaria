@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Proximidade extends Model
 {
     use HasFactory;
+
+
+      //muitos para muitos
+      public function imoveis(){
+        return $this->belongsToMany(Imovel::class)->withTimestamps();
+
+    }
 }
+
+

@@ -8,7 +8,7 @@ class Cidade extends Model
 {
 
     protected $table='cidades';
-    protected $filable = ['nome'];
+    protected $fillable = ['nome'];
 
     public function imoveis(){
         return $this->hasMany(Imovel::class);
