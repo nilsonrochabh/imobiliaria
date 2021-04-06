@@ -14,9 +14,9 @@
          <tbody>
              @forelse ($imoveis as $imovel )
                 <tr>
-                <td>{{$imovel->cidade->nome}}</td>
-                <td>{{$imovel->endereco->bairro}}</td>
-                <td>{{$imovel->titulo}}</td>
+                    <td>{{$imovel->cidade->nome}}</td>
+                    <td>{{$imovel->endereco->bairro}}</td>
+                    <td>{{$imovel->titulo}}</td>
                 <td class = 'right-align' >
                     <span>
                     <a href="{{route('admin.imoveis.edit',$imovel->id)}}">
