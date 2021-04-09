@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImovelRequest;
 use App\Models\Cidade;
 use App\Models\Finalidade;
 use App\Models\Tipo;
@@ -33,23 +34,14 @@ class ImovelController extends Controller
      */
     public function create()
     {
-
         $cidades=Cidade::all();
         $tipos = Tipo::all();
         $finalidades=Finalidade::all();
         $action=route('admin.imoveis.store');
-
         $proximidades = Proximidade::all();
         return view('admin.imoveis.form', compact('action','cidades', 'tipos','finalidades','proximidades'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(ImovelRequest $request)
     {
         //transação em DB
         DB::beginTransaction();
@@ -60,12 +52,9 @@ class ImovelController extends Controller
             if($request->has('proximidades')){
                 //atualiza as proximidades attach e o detach
                 $imovel->proximidades()->sync($request->proximidades);
-
-
             }
 
         DB::Commit();
-
          $request->session()->flash('sucesso', 'O imovel foi incluida com sucesso' );
          return redirect()->route('admin.imoveis.index');
     }
@@ -99,7 +88,7 @@ class ImovelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImovelRequest $request, $id)
     {
         //
     }

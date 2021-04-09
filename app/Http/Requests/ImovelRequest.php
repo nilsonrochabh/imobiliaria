@@ -13,7 +13,7 @@ class ImovelRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -40,6 +40,21 @@ class ImovelRequest extends FormRequest
             'complemento'=>'bail|nullable|string',
             'rua'=>'bail|required|min:3|max:50',
             'proximidades'=>'bail|nullable|array'
+        ];
+    }
+
+
+    //customizar campos
+
+    public function attributes()
+    {
+        return[
+            'cidade_id' =>'Cidade',
+            'tipo_id' =>'Tipo de imóvel',
+            'finalidade_id' =>'Finalidade',
+            'preco' =>'Preço',
+            'dormitorios' =>'Quantidade de dormitórios',
+            'garagens' =>'Quantidade de vagas'
         ];
     }
 }
